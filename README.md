@@ -29,7 +29,7 @@ docker-compose up -d
 
 ## produce messages
 ```bash
-./produce-message.sh localhost:9092 the-topic "key:message"
+./produce-message.sh localhost:9092 the-topic key:message
 ```
 
 ## shutdown cluster
