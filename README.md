@@ -32,6 +32,11 @@ docker-compose up -d
 ./produce-message.sh localhost:9092 the-topic key:message
 ```
 
+A slightly more structured message:
+```bash
+./produce-message.sh localhost:9092 the-topic key:'{"uid":"'$(uuidgen)'", "message":"hello"}'
+```
+
 ## shutdown cluster
 ```bash
 docker-compose stop
