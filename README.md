@@ -38,6 +38,14 @@ A slightly more structured message:
 echo key:'{"uid":"'$(uuidgen)'", "message":"hello"}' | docker run -i --network=host edenhill/kafkacat:1.5.0 -P -b localhost:9092 -t the-topic -K:
 ```
 
+## delete a topic
+```bash
+docker run -i --network=host confluentinc/cp-kafka:5.2.4 /usr/bin/kafka-topics \
+	--delete \
+	--bootstrap-server localhost:9092 \
+	--topic the-topic
+```
+
 ## shutdown cluster
 ```bash
 docker-compose stop
