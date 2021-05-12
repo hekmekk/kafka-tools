@@ -25,7 +25,7 @@ docker run -i --network=host edenhill/kafkacat:1.5.0 -L -b localhost:9092
 
 ## start a consumer
 ```bash
-docker run -it --network=host edenhill/kafkacat:1.5.0 -C -f 'partition=%p offset=%o >> key=%k value=%s\n' -b "localhost:9092" -t "the-topic"
+docker run -it --network=host edenhill/kafkacat:1.5.0 -C -X topic.partitioner=murmur2_random -f 'partition=%p offset=%o >> key=%k value=%s\n' -b "localhost:9092" -t "the-topic"
 ```
 
 ## produce messages
