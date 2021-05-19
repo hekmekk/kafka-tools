@@ -25,17 +25,17 @@ docker run -i --network=host edenhill/kafkacat:1.5.0 -L -b localhost:9092
 
 ## start a consumer
 ```bash
-docker run -it --network=host edenhill/kafkacat:1.5.0 -C -X topic.partitioner=murmur2_random -f 'partition=%p offset=%o >> key=%k value=%s\n' -b "localhost:9092" -t "the-topic"
+docker run -it --network=host edenhill/kafkacat:1.5.0 -C -f 'partition=%p offset=%o >> key=%k value=%s\n' -b "localhost:9092" -t "the-topic"
 ```
 
 ## produce messages
 ```bash
-echo "key:value" | docker run -i --network=host edenhill/kafkacat:1.5.0 -P -b localhost:9092 -t the-topic -K:
+echo "key:value" | docker run -i --network=host edenhill/kafkacat:1.5.0 -X topic.partitioner=murmur2_random -P -b localhost:9092 -t the-topic -K:
 ```
 
 A slightly more structured message:
 ```bash
-echo key:'{"uid":"'$(uuidgen)'", "message":"hello"}' | docker run -i --network=host edenhill/kafkacat:1.5.0 -P -b localhost:9092 -t the-topic -K:
+echo key:'{"uid":"'$(uuidgen)'", "message":"hello"}' | docker run -i --network=host edenhill/kafkacat:1.5.0 -P -X topic.partitioner=murmur2_random -b localhost:9092 -t the-topic -K:
 ```
 
 ## delete a topic
