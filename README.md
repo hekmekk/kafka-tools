@@ -14,7 +14,7 @@ docker-compose up -d
 
 ## create a topic
 ```bash
-docker run -i --network=host confluentinc/cp-kafka:5.2.4 /usr/bin/kafka-topics \
+docker run --rm -i --network=host confluentinc/cp-kafka:5.2.4 /usr/bin/kafka-topics \
 	--create \
 	--bootstrap-server localhost:9092 \
 	--replication-factor 3 \
@@ -25,27 +25,27 @@ docker run -i --network=host confluentinc/cp-kafka:5.2.4 /usr/bin/kafka-topics \
 
 ## list topics
 ```bash
-docker run -i --network=host edenhill/kafkacat:1.5.0 -L -b localhost:9092
+docker run --rm -i --network=host edenhill/kafkacat:1.5.0 -L -b localhost:9092
 ```
 
 ## start a consumer
 ```bash
-docker run -it --network=host edenhill/kafkacat:1.5.0 -C -f 'partition=%p offset=%o >> key=%k value=%s\n' -b "localhost:9092" -t "the-topic"
+docker run --rm -it --network=host edenhill/kafkacat:1.5.0 -C -f 'partition=%p offset=%o >> key=%k value=%s\n' -b "localhost:9092" -t "the-topic"
 ```
 
 ## produce messages
 ```bash
-echo "key:value" | docker run -i --network=host edenhill/kafkacat:1.5.0 -X topic.partitioner=murmur2_random -P -b localhost:9092 -t the-topic -K:
+echo "key:value" | docker run --rm -i --network=host edenhill/kafkacat:1.5.0 -X topic.partitioner=murmur2_random -P -b localhost:9092 -t the-topic -K:
 ```
 
 A slightly more structured message:
 ```bash
-echo key:'{"uid":"'$(uuidgen)'", "message":"hello"}' | docker run -i --network=host edenhill/kafkacat:1.5.0 -P -X topic.partitioner=murmur2_random -b localhost:9092 -t the-topic -K:
+echo key:'{"uid":"'$(uuidgen)'", "message":"hello"}' | docker run --rm -i --network=host edenhill/kafkacat:1.5.0 -P -X topic.partitioner=murmur2_random -b localhost:9092 -t the-topic -K:
 ```
 
 ## delete a topic
 ```bash
-docker run -i --network=host confluentinc/cp-kafka:5.2.4 /usr/bin/kafka-topics \
+docker run --rm -i --network=host confluentinc/cp-kafka:5.2.4 /usr/bin/kafka-topics \
 	--delete \
 	--bootstrap-server localhost:9092 \
 	--topic the-topic
