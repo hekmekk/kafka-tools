@@ -7,6 +7,11 @@ Apart from `create-topics.sh`, these scripts are mere convenience wrappers aroun
 docker-compose up -d
 ```
 
+## start single node kafka and zookeeper
+```shell script
+./start-kafka-single-node.sh
+```
+
 ## create a topic
 ```bash
 docker run -i --network=host confluentinc/cp-kafka:5.2.4 /usr/bin/kafka-topics \
