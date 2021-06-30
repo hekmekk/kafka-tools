@@ -35,7 +35,7 @@ docker run --rm -it --network=host edenhill/kafkacat:1.5.0 -C -f 'partition=%p o
 
 ## produce messages
 ```bash
-echo "key:value" | docker run --rm -i --network=host edenhill/kafkacat:1.5.0 -X topic.partitioner=murmur2_random -P -b localhost:9092 -t the-topic -K:
+echo "key:value" | docker run --rm -i --network=host edenhill/kafkacat:1.5.0 -X topic.partitioner=murmur2_random -P -b localhost:9092 -t the-topic -Z -K:
 ```
 
 A slightly more structured message:
