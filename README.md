@@ -33,6 +33,11 @@ docker run --rm -i --network=host edenhill/kcat:1.7.0 -L -b localhost:9092
 docker run --rm -it --network=host edenhill/kcat:1.7.0 -C -f 'partition=%p offset=%o >> key=%k value=%s\n' -b "localhost:9092" -t "the-topic"
 ```
 
+## start a consumer group
+```bash
+docker run --rm -it --network=host edenhill/kcat:1.7.0 -b "localhost:9092" -f "topic=%t >> partition=%p offset=%o >> key=%k value=%s\n" -G consumer topicA topicB topicC
+```
+
 ## produce messages
 ```bash
 echo "key:value" | docker run --rm -i --network=host edenhill/kcat:1.7.0 -X topic.partitioner=murmur2_random -P -b localhost:9092 -t the-topic -Z -K:
